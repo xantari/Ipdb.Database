@@ -28,5 +28,16 @@ namespace Ipdb.Models
                 return IpdbSystemType.Mechanical;
             return IpdbSystemType.Unknown;
         }
+
+        public static string GetTypeShortName(string type)
+        {
+            if (type.Contains("Solid State Electronic"))
+                return "SS";
+            if (type.Contains("Electro-mechanical"))
+                return "EM";
+            if (type.Contains("Purely Mechanical"))
+                return "ME";
+            return string.Empty;
+        }
     }
 }

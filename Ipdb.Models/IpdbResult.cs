@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,7 +19,6 @@ namespace Ipdb.Models
 
         public int IpdbId { get; set; }
         public string Title { get; set; }
-
         public int? Players { get; set; }
         public string AdditionalDetails { get; set; }
         public decimal? AverageFunRating { get; set; }
@@ -30,15 +30,19 @@ namespace Ipdb.Models
         public int ManufacturerId { get; set; }
         public string CommonAbbreviations { get; set; }
         public string Type { get; set; }
-        public string MPU { get; set; }
-        public DateTime? DateOfManufacture { get; set; }
-        public string ModelNumber { get; set; }
-
+        [JsonIgnore]
         public IpdbSystemType SystemType
         {
             get { return IpdbSystemTypeInfo.GetSystemTypeFromString(Type); }
         }
 
+        public string TypeShortName
+        {
+            get { return IpdbSystemTypeInfo.GetTypeShortName(Type); }
+        }
+        public string MPU { get; set; }
+        public DateTime? DateOfManufacture { get; set; }
+        public string ModelNumber { get; set; }
         public int? ProductionNumber { get; set; }
         public string Theme { get; set; }
         public string NotableFeatures { get; set; }

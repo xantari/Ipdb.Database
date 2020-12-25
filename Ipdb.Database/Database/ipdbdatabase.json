@@ -1,5 +1,5 @@
 {
-  "LastRefreshDateUtc": "2020-12-25T19:29:53.1299386Z",
+  "LastRefreshDateUtc": "2020-12-25T19:37:29.3879631Z",
   "Data": [
     {
       "IpdbId": 1,
@@ -9,8 +9,8 @@
       "ManufacturerShortName": "Gottlieb",
       "ManufacturerId": 93,
       "Type": "Electro-mechanical (EM)",
+      "TypeShortName": "EM",
       "DateOfManufacture": "1941-08-01T00:00:00",
-      "SystemType": "ElectroMechanical",
       "Theme": "Sports - Bowling",
       "NotableFeatures": "Scoring bumpers (16), Gobble hole (1). Hitting numbered bumpers on playfield light corresponding pins on backglass.",
       "DesignBy": "Harry Mabs",
@@ -26,9 +26,9 @@
       "ManufacturerShortName": "Gottlieb",
       "ManufacturerId": 93,
       "Type": "Electro-mechanical (EM)",
+      "TypeShortName": "EM",
       "DateOfManufacture": "1975-11-01T00:00:00",
       "ModelNumber": "383",
-      "SystemType": "ElectroMechanical",
       "ProductionNumber": 2825,
       "Theme": "Wizard/Magic",
       "NotableFeatures": "Flippers (2), Pop bumpers (2), Slingshots (2), 5-bank drop targets (2), Standup target (1), Dual inlanes, Half-moon credit window.\r\n\r\nMaximum displayed point score is 99,990 points.\r\n\r\nReplay wheel maximum: 9\r\n\r\nSound: 3 chimes, knocker.",
@@ -45,8 +45,8 @@
       "ManufacturerShortName": "Bally",
       "ManufacturerId": 47,
       "Type": "Electro-mechanical (EM)",
+      "TypeShortName": "EM",
       "ModelNumber": "669",
-      "SystemType": "ElectroMechanical",
       "Theme": "Beach - Boating - Happiness - Recreation - Swimming - Water - Women",
       "NotableFeatures": "5 balls for 5 cents. Trap holes (25), Rollover buttons (2), Magic Squares\r\n\r\nPlayer can press buttons to rearrange numbers on card in backglass if these features are purchased:\r\n� Press buttons before shooting 4th ball.\r\n� Press buttons before shooting 5th ball.\r\n� Press buttons after shooting 5th ball.",
       "DesignBy": "Don Hooker",
@@ -60,8 +60,8 @@
       "ManufacturerShortName": "Ace Manufacturing Company, of Brooklyn, New York, USA (1932)",
       "ManufacturerId": 11,
       "Type": "Pure Mechanical (PM)",
+      "TypeShortName": "",
       "DateOfManufacture": "1932-04-01T00:00:00",
-      "SystemType": "Unknown",
       "NotableFeatures": "Available in penny or nickel play. Advertised as 27 1/2 inches long by 15 1/2 inches wide. Made without nails or screws, everything slides in grooves.",
       "Notes": "Samples sold for $16.50 each.",
       "PhotosIn": "Automatic Age, Jun 1932, page 120\r\n\r\nAutomatic Age, July 1932, page 94\r\n\r\nPinball Ad Catalog Volume 1, 1931-1933, page 14"
