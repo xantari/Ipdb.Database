@@ -106,6 +106,15 @@ namespace Ipdb.Utilities
             return temp.Trim();
         }
 
+        public static string NormalizeCarriageReturns(this string s)
+        {
+            return s
+                .Replace("\r\n", "\n")
+                .Replace("\n\r", "\n")
+                .Replace("\r", "\n")
+                .Replace("\n", "\r\n");
+        }
+
         public static string ConvertBreaksToCarriageReturns(this string s)
         {
             return s.Replace("<br>", "\r\n").Replace("<br/>", "\r\n").Replace("<br />", "\r\n").Trim();

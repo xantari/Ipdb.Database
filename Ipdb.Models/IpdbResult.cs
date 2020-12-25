@@ -21,7 +21,7 @@ namespace Ipdb.Models
 
         public int? Players { get; set; }
         public string AdditionalDetails { get; set; }
-        public decimal AverageFunRating { get; set; }
+        public decimal? AverageFunRating { get; set; }
         public string Manufacturer { get; set; }
         /// <summary>
         /// Manufacturer short trade name
@@ -39,7 +39,7 @@ namespace Ipdb.Models
             get { return IpdbSystemTypeInfo.GetSystemTypeFromString(Type); }
         }
 
-        public int ProductionNumber { get; set; }
+        public int? ProductionNumber { get; set; }
         public string Theme { get; set; }
         public string NotableFeatures { get; set; }
         public string Toys { get; set; }

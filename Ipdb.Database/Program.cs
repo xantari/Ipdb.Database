@@ -26,16 +26,16 @@ namespace Ipdb.Database
 
             var scraper = new IpdbScraper();
 
-            var test = scraper.Scrape(2);
+            //var oneResult = scraper.Scrape(1);
 
-            var result = scraper.ScrapeAll(1, 5);
+            var result = scraper.ScrapeAll();
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             serializer.NullValueHandling = NullValueHandling.Ignore;
             serializer.Formatting = Formatting.Indented;
             //serializer.Error += Serializer_Error; //Ignore errors
-            using (StreamWriter sw = new StreamWriter("Database\\ipdbdatabase.json", false))
+            using (StreamWriter sw = new StreamWriter("C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabase.json", false))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, result);

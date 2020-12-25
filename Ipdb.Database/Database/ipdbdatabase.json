@@ -1,0 +1,70 @@
+{
+  "LastRefreshDateUtc": "2020-12-25T19:29:53.1299386Z",
+  "Data": [
+    {
+      "IpdbId": 1,
+      "Title": "A-B-C Bowler",
+      "AdditionalDetails": "IPD No. 1 / August, 1941 / 1 Player",
+      "Manufacturer": "D. Gottlieb & Company (1931-1977) [Trade Name: Gottlieb]",
+      "ManufacturerShortName": "Gottlieb",
+      "ManufacturerId": 93,
+      "Type": "Electro-mechanical (EM)",
+      "DateOfManufacture": "1941-08-01T00:00:00",
+      "SystemType": "ElectroMechanical",
+      "Theme": "Sports - Bowling",
+      "NotableFeatures": "Scoring bumpers (16), Gobble hole (1). Hitting numbered bumpers on playfield light corresponding pins on backglass.",
+      "DesignBy": "Harry Mabs",
+      "ArtBy": "Roy Parker",
+      "PhotosIn": "Pinball Memories, page 18\r\n\r\nThe Complete Pinball Book, page 128"
+    },
+    {
+      "IpdbId": 2,
+      "Title": "Abra Ca Dabra",
+      "AdditionalDetails": "IPD No. 2 / November, 1975 / 1 Player",
+      "AverageFunRating": 7.7,
+      "Manufacturer": "D. Gottlieb & Company (1931-1977) [Trade Name: Gottlieb]",
+      "ManufacturerShortName": "Gottlieb",
+      "ManufacturerId": 93,
+      "Type": "Electro-mechanical (EM)",
+      "DateOfManufacture": "1975-11-01T00:00:00",
+      "ModelNumber": "383",
+      "SystemType": "ElectroMechanical",
+      "ProductionNumber": 2825,
+      "Theme": "Wizard/Magic",
+      "NotableFeatures": "Flippers (2), Pop bumpers (2), Slingshots (2), 5-bank drop targets (2), Standup target (1), Dual inlanes, Half-moon credit window.\r\n\r\nMaximum displayed point score is 99,990 points.\r\n\r\nReplay wheel maximum: 9\r\n\r\nSound: 3 chimes, knocker.",
+      "DesignBy": "Jeff Brenner",
+      "ArtBy": "Gordon Morison",
+      "Notes": "The Add-a-ball version of this game is Gottlieb's 1977 'Team One' which was exported to Italy as Gottlieb's 1977 'Kicker', both with different artwork.\r\n\r\nSame backglass artwork as Gottlieb's 1971 'Wizard'.\r\n\r\nPrice to operator: $895 FOB Chicago, per newsletter from authorized distributor dated November 1975.",
+      "PhotosIn": "Pinball Memories, pages 104-107\r\n\r\nThe Complete Pinball Book, page 94\r\n\r\nThe Pinball Compendium 1970-1981, page 81\r\n\r\nPinball Machines for Italy - Senza Ripetizione Della Partita, page 89\r\n\r\nMike Pacak's Pinball Flyer Reference Book A-F\r\n\r\nThe Pinball Compendium Electro-mechanical Era, page 205"
+    },
+    {
+      "IpdbId": 3,
+      "Title": "Acapulco",
+      "AdditionalDetails": "IPD No. 3 / March 21, 1961 / 1 Player",
+      "Manufacturer": "Bally Manufacturing Corporation (1931-1983) [Trade Name: Bally]",
+      "ManufacturerShortName": "Bally",
+      "ManufacturerId": 47,
+      "Type": "Electro-mechanical (EM)",
+      "ModelNumber": "669",
+      "SystemType": "ElectroMechanical",
+      "Theme": "Beach - Boating - Happiness - Recreation - Swimming - Water - Women",
+      "NotableFeatures": "5 balls for 5 cents. Trap holes (25), Rollover buttons (2), Magic Squares\r\n\r\nPlayer can press buttons to rearrange numbers on card in backglass if these features are purchased:\r\n� Press buttons before shooting 4th ball.\r\n� Press buttons before shooting 5th ball.\r\n� Press buttons after shooting 5th ball.",
+      "DesignBy": "Don Hooker",
+      "PhotosIn": "Bally Bingo Pinball Machines, pages 98-99"
+    },
+    {
+      "IpdbId": 4,
+      "Title": "Ace",
+      "AdditionalDetails": "IPD No. 4 / April, 1932 / 1 Player",
+      "Manufacturer": "Ace Manufacturing Company, of Brooklyn, New York, USA (1932)",
+      "ManufacturerShortName": "Ace Manufacturing Company, of Brooklyn, New York, USA (1932)",
+      "ManufacturerId": 11,
+      "Type": "Pure Mechanical (PM)",
+      "DateOfManufacture": "1932-04-01T00:00:00",
+      "SystemType": "Unknown",
+      "NotableFeatures": "Available in penny or nickel play. Advertised as 27 1/2 inches long by 15 1/2 inches wide. Made without nails or screws, everything slides in grooves.",
+      "Notes": "Samples sold for $16.50 each.",
+      "PhotosIn": "Automatic Age, Jun 1932, page 120\r\n\r\nAutomatic Age, July 1932, page 94\r\n\r\nPinball Ad Catalog Volume 1, 1931-1933, page 14"
+    }
+  ]
+}

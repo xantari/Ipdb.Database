@@ -97,7 +97,7 @@ namespace Ipdb.Utilities
             Log.Information("{Scraper}: Fetching machine type...", _scraperName);
             result.Type = GetTextBySignificantNode(doc, "Type:");
             result.MPU = GetTextBySignificantNode(doc, "MPU:");
-            result.ProductionNumber = GetIntBySignificantNode(doc, "Production:");
+            result.ProductionNumber = GetIntNullableBySignificantNode(doc, "Production:");
             result.CommonAbbreviations = GetTextBySignificantNode(doc, "Common Abbreviations:");
             result.Theme = GetTextBySignificantNode(doc, "Theme:");
             result.NotableFeatures = GetTextBySignificantNode(doc, "Notable Features:");
@@ -141,8 +141,32 @@ namespace Ipdb.Utilities
         /// <returns></returns>
         private string GetManufacturerShortName(string manufacturer)
         {
+            if (manufacturer.ToLower().Contains("alvin g."))
+                return "Alvin G.";
+            if (manufacturer.ToLower().Contains("atari"))
+                return "Atari";
+            if (manufacturer.ToLower().Contains("bally"))
+                return "Bally";
+            if (manufacturer.ToLower().Contains("capcom"))
+                return "Capcom";
+            if (manufacturer.ToLower().Contains("chicago coin"))
+                return "Chicago Coin";
+            if (manufacturer.ToLower().Contains("data east"))
+                return "Data East";
+            if (manufacturer.ToLower().Contains("game plan"))
+                return "Game Plan";
+            if (manufacturer.ToLower().Contains("gottlieb"))
+                return "Gottlieb";
+            if (manufacturer.ToLower().Contains("midway"))
+                return "Midway";
+            if (manufacturer.ToLower().Contains("premier technology"))
+                return "Premier";
+            if (manufacturer.ToLower().Contains("sega"))
+                return "Sega";
             if (manufacturer.ToLower().Contains("stern"))
                 return "Stern";
+            if (manufacturer.ToLower().Contains("williams"))
+                return "Williams";
             return manufacturer;
         }
 
@@ -168,7 +192,7 @@ namespace Ipdb.Utilities
             HtmlNode node = doc.DocumentNode.SelectSingleNode("//b[contains(text(),'" + textToFind + "')]")?.ParentNode?.NextSibling;
             if (node != null)
             {
-                return node.InnerHtml.CondenseHtml(retainCarriageReturns).ConvertBreaksToCarriageReturns().ConvertHtmlToPlainText();
+                return node.InnerHtml.CondenseHtml(retainCarriageReturns).ConvertBreaksToCarriageReturns().ConvertHtmlToPlainText().NormalizeCarriageReturns();
             }
 
             return null;
@@ -183,6 +207,17 @@ namespace Ipdb.Utilities
             }
 
             return 0;
+        }
+
+        private int? GetIntNullableBySignificantNode(HtmlDocument doc, string textToFind)
+        {
+            HtmlNode node = doc.DocumentNode.SelectSingleNode("//b[contains(text(),'" + textToFind + "')]")?.ParentNode?.NextSibling;
+            if (node != null)
+            {
+                return Convert.ToInt32(node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric());
+            }
+
+            return null;
         }
 
         private List<IpdbUrl> GetUrlsBySignificantNode(HtmlDocument doc, string textToFind, string urlHint = "")
@@ -201,6 +236,8 @@ namespace Ipdb.Utilities
                 }
             }
 
+            if (urls.Count == 0)
+                return null; //Prevent it from being serialized in the .json so it's smaller
             return urls;
         }
 
@@ -242,7 +279,8 @@ namespace Ipdb.Utilities
                     }
                 }
             }
-
+            if (urls.Count == 0)
+                return null; //Prevent it from being serialized in the .json so it's smaller
             return urls;
         }
     }
