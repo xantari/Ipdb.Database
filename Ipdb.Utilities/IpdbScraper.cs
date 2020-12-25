@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using HtmlAgilityPack;
 using Ipdb.Models;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace Ipdb.Utilities
@@ -23,7 +25,7 @@ namespace Ipdb.Utilities
 
         }
 
-        public IpdbDatabase ScrapeAll(int start = 1, int end = 10000)
+        public IpdbDatabase ScrapeAll(string incrementalSaveLocation, int start = 1, int end = 10000)
         {
             Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start,end);
             var model = new IpdbDatabase();
@@ -42,8 +44,23 @@ namespace Ipdb.Utilities
 
                 if (thresholdBeforeQuitCounter > maxThresholdOfNullsBeforeQuit)
                 {
-                    Log.Information("{Scraper}: Reach maximum threshold of invalid machine id's not returning results. Quiting...", _scraperName);
+                    Log.Information("{Scraper}: Reached maximum threshold of invalid machine id's not returning results. Quiting...", _scraperName);
                     break; //Reached to many invalid machines, quit.
+                }
+
+                if (i % 50 == 0 && !string.IsNullOrEmpty(incrementalSaveLocation)) //Every 50 entries save where we are at so we can resume if errors occur
+                {
+                    Log.Information("{Scraper}: Reached incremental save threshold. Saving where we are at so far.");
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    serializer.NullValueHandling = NullValueHandling.Ignore;
+                    serializer.Formatting = Formatting.Indented;
+                    //serializer.Error += Serializer_Error; //Ignore errors
+                    using (StreamWriter sw = new StreamWriter(incrementalSaveLocation, false))
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(writer, result);
+                    }
                 }
             }
             Log.Information("{Scraper}: Finished Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
@@ -180,6 +197,8 @@ namespace Ipdb.Utilities
                 bool success = DateTime.TryParse(data, out result);
                 if (success)
                     return result;
+                else if (data.IsNumeric()) //Could just be a year
+                    return new DateTime(Convert.ToInt32(data), 1, 1);
                 else
                     Log.Warning("Unable to parse date: " + data);
             }

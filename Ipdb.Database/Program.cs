@@ -27,7 +27,7 @@ namespace Ipdb.Database
 
             //var oneResult = scraper.Scrape(1);
             //var result = scraper.ScrapeAll(1, 5);
-            var result = scraper.ScrapeAll();
+            var result = scraper.ScrapeAll("C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabasetemp.json");
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
