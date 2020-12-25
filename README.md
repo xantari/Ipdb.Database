@@ -6,6 +6,6 @@ related programs this was created to have more information then the current .csv
 
 Also there is no indication as to when those databases were last updated. This project aims to solve that and provide a more robust file format for interaction with IPDB data.
 
-# Latest Database Here:
+# Latest Database
 
 [IPDB Database (.json)](https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json)
