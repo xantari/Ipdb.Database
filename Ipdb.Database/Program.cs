@@ -23,13 +23,11 @@ namespace Ipdb.Database
             Log.Information("User Agent strings initialized.");
 
             var database = new IpdbDatabase();
-
             var scraper = new IpdbScraper();
 
             //var oneResult = scraper.Scrape(1);
-
-            var result = scraper.ScrapeAll(1, 5);
-            //var result = scraper.ScrapeAll();
+            //var result = scraper.ScrapeAll(1, 5);
+            var result = scraper.ScrapeAll();
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
