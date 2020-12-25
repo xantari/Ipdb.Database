@@ -1,6 +1,9 @@
-﻿using Ipdb.Utilities;
+﻿using Ipdb.Models;
+using Ipdb.Utilities;
+using Newtonsoft.Json;
 using Serilog;
 using System;
+using System.IO;
 
 namespace Ipdb.Database
 {
@@ -13,9 +16,32 @@ namespace Ipdb.Database
                 .WriteTo.Console()
                 .CreateLogger();
 
+            Log.Information("Starting IPDB Database Creator.");
+
             UserAgentStrings.InitializeList("Data\\UserAgentStrings.txt");
 
-            Console.WriteLine("Hello World!");
+            Log.Information("User Agent strings initialized.");
+
+            var database = new IpdbDatabase();
+
+            var scraper = new IpdbScraper();
+
+            var test = scraper.Scrape(2);
+
+            var result = scraper.ScrapeAll(1, 5);
+
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            serializer.Formatting = Formatting.Indented;
+            //serializer.Error += Serializer_Error; //Ignore errors
+            using (StreamWriter sw = new StreamWriter("Database\\ipdbdatabase.json", false))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, result);
+            }
+
+            Log.Information("Scraping Finished.");
         }
     }
 }
