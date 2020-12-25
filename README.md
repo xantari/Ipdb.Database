@@ -9,3 +9,9 @@ Also there is no indication as to when those databases were last updated. This p
 # Latest Database
 
 [IPDB Database (.json)](https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json)
+
+# Loading the database (C#)
+
+```cs
+var data = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(@"{pathToJson}\\ipdbdatabase.json"));
+```
