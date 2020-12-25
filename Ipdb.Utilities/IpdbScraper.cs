@@ -50,7 +50,7 @@ namespace Ipdb.Utilities
 
                 if (i % 50 == 0 && !string.IsNullOrEmpty(incrementalSaveLocation)) //Every 50 entries save where we are at so we can resume if errors occur
                 {
-                    Log.Information("{Scraper}: Reached incremental save threshold. Saving where we are at so far.");
+                    Log.Information("{Scraper}: Reached incremental save threshold. Saving where we are at so far.", _scraperName);
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                     serializer.NullValueHandling = NullValueHandling.Ignore;
@@ -59,7 +59,7 @@ namespace Ipdb.Utilities
                     using (StreamWriter sw = new StreamWriter(incrementalSaveLocation, false))
                     using (JsonWriter writer = new JsonTextWriter(sw))
                     {
-                        serializer.Serialize(writer, result);
+                        serializer.Serialize(writer, model);
                     }
                 }
             }
