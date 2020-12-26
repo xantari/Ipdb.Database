@@ -6,6 +6,8 @@ related programs this was created to have more information then the current .csv
 
 Also there is no indication as to when those databases were last updated. This project aims to solve that and provide a more robust file format for interaction with IPDB data.
 
+Database set to refresh weekly automatically. If however there are minimal changes this may switch to monthly instead. Git change log will indicate when a change occurs and you can view the diff from there.
+
 # Latest Database
 
 [IPDB Database (.json)](https://github.com/xantari/Ipdb.Database/raw/master/Ipdb.Database/Database/ipdbdatabase.json)

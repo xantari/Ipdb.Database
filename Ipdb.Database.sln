@@ -3,14 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipdb.Database", "Ipdb.Database\Ipdb.Database.csproj", "{3A896BAE-438D-4CB7-BBC9-28FA568682F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ipdb.Database", "Ipdb.Database\Ipdb.Database.csproj", "{3A896BAE-438D-4CB7-BBC9-28FA568682F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipdb.Utilities", "Ipdb.Utilities\Ipdb.Utilities.csproj", "{54BEF503-FAA9-4D6A-8BC3-D44908C904BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ipdb.Utilities", "Ipdb.Utilities\Ipdb.Utilities.csproj", "{54BEF503-FAA9-4D6A-8BC3-D44908C904BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipdb.Models", "Ipdb.Models\Ipdb.Models.csproj", "{52C4B9D1-BED4-40A4-85BB-1471F35F125B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ipdb.Models", "Ipdb.Models\Ipdb.Models.csproj", "{52C4B9D1-BED4-40A4-85BB-1471F35F125B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BB918FA2-501B-4646-A585-564081402979}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject

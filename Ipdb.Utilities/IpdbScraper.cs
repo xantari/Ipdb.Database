@@ -303,7 +303,7 @@ namespace Ipdb.Utilities
                     urlNodes = node.SelectNodes(".//a[contains(@href,'" + urlHint + "')]");
                 foreach (var urlNode in urlNodes)
                 {
-                    urls.Add(new IpdbUrl() { Name = urlNode.InnerText.CondenseHtml().ConvertHtmlToPlainText(), Url = urlNode.Attributes["href"].Value });
+                    urls.Add(new IpdbUrl() { Name = urlNode.InnerText.CondenseHtml().ConvertHtmlToPlainText().NormalizeCarriageReturns(), Url = urlNode.Attributes["href"].Value });
                 }
             }
 
@@ -322,7 +322,7 @@ namespace Ipdb.Utilities
             {
                 HtmlNode urlNode = startOfFileSection.SelectSingleNode(".//a[contains(@href,'/files/')]");
                 if (urlNode != null) //Sometimes there are no links to the documentation due to copyright and no <a> tag present
-                    urls.Add(new IpdbUrl() { Name = urlNode.InnerText.CondenseHtml().ConvertHtmlToPlainText(), Url = urlNode.Attributes["href"].Value });
+                    urls.Add(new IpdbUrl() { Name = urlNode.InnerText.CondenseHtml().ConvertHtmlToPlainText().NormalizeCarriageReturns(), Url = urlNode.Attributes["href"].Value });
 
                 //Now find all ROM urls. We stop when we have found a table row, whose first cell is not blank (meaning we went to another bold title of another row)
                 var nextRow = doc.DocumentNode.SelectSingleNode("//b/span[contains(text(),'" + textToFind + "')]")
@@ -340,7 +340,7 @@ namespace Ipdb.Utilities
                         var url = nextRow.SelectSingleNode(".//a[contains(@href,'/files/')]");
                         if (url != null)
                         {
-                            urls.Add(new IpdbUrl() { Name = url.InnerText.CondenseHtml().ConvertHtmlToPlainText(), Url = url.Attributes["href"].Value });
+                            urls.Add(new IpdbUrl() { Name = url.InnerText.CondenseHtml().ConvertHtmlToPlainText().NormalizeCarriageReturns(), Url = url.Attributes["href"].Value });
                             nextRow = nextRow.NextSibling;
                         }
                         else
@@ -367,7 +367,7 @@ namespace Ipdb.Utilities
                 if (urlNodes != null)
                 {
                     foreach (var urlNode in urlNodes) //The /tn_ is to remove the thumbnail version of hte image and just get the path to the full image
-                        urls.Add(new IpdbUrl() { Name = urlNode.Attributes["alt"].Value?.Trim(), Url = urlNode.Attributes["src"].Value?.Replace("/tn_", "/") });
+                        urls.Add(new IpdbUrl() { Name = urlNode.Attributes["alt"].Value?.Trim().NormalizeCarriageReturns(), Url = urlNode.Attributes["src"].Value?.Replace("/tn_", "/") });
                 }
             }
             if (urls.Count == 0)
