@@ -20,11 +20,12 @@ namespace Ipdb.Utilities
         public CookieContainer CookieJar { get; set; } //https://stackoverflow.com/questions/15206644/how-to-pass-cookies-to-htmlagilitypack-or-webclient
         public string RandomUserAgentString { get; set; }
 
-        private int HTTPRequestMaxRetryCount { get; set; }
-        private int SleepTimeBetweenHTTPRequestsLowRange { get; set; }
-        private int SleepTimeBetweenHTTPRequestsHighRange { get; set; }
+        public int HTTPRequestMaxRetryCount { get; set; }
+        public int SleepTimeBetweenHTTPRequestsLowRange { get; set; }
+        public int SleepTimeBetweenHTTPRequestsHighRange { get; set; }
+        public bool EnableRandomSleepTime { get; set; }
 
-        public ScraperBase(int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
+        public ScraperBase(bool enableRandomSleepTime, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
         {
             CookieJar = new CookieContainer();
             Statistics = new ScraperStatistics();
@@ -43,17 +44,19 @@ namespace Ipdb.Utilities
             HTTPRequestMaxRetryCount = httpRequestMaxRetryCount;
             SleepTimeBetweenHTTPRequestsLowRange = sleepTimeBetweenHTTPRequestsLowRange;
             SleepTimeBetweenHTTPRequestsHighRange = sleepTimeBetweenHTTPRequestsHighRange;
+            EnableRandomSleepTime = enableRandomSleepTime;
 
             HttpWebClient = new HttpClient(httpClientHandler);
         }
 
-        public ScraperBase(ProxyServices proxyService = null, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
+        public ScraperBase(ProxyServices proxyService = null, bool enableRandomSleepTime = true, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
         {
             ProxyService = proxyService;
 
             HTTPRequestMaxRetryCount = httpRequestMaxRetryCount;
             SleepTimeBetweenHTTPRequestsLowRange = sleepTimeBetweenHTTPRequestsLowRange;
             SleepTimeBetweenHTTPRequestsHighRange = sleepTimeBetweenHTTPRequestsHighRange;
+            EnableRandomSleepTime = enableRandomSleepTime;
 
             //User-Agent: https://techblog.willshouse.com/2012/01/03/most-common-user-agents/
             //HttpWebClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml;");
@@ -124,7 +127,8 @@ namespace Ipdb.Utilities
                     {
                         data = streamReader.ReadToEnd();
                     }
-                    Extensions.SleepForRandomTime(true, SleepTimeBetweenHTTPRequestsLowRange, SleepTimeBetweenHTTPRequestsHighRange); //Make HTTP request look more natural
+                    if (EnableRandomSleepTime)
+                        Extensions.SleepForRandomTime(true, SleepTimeBetweenHTTPRequestsLowRange, SleepTimeBetweenHTTPRequestsHighRange); //Make HTTP request look more natural
                     break;
                 }
                 catch (Exception e)

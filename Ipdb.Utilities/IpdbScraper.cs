@@ -14,13 +14,13 @@ namespace Ipdb.Utilities
         private string baseUrl = "https://www.ipdb.org/machine.cgi?id=";
         private string _scraperName = "Ipdb scraper";
 
-        public IpdbScraper(int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250,
-            int sleepTimeBetweenHTTPRequestsHighRange = 1500) : base(httpRequestMaxRetryCount, sleepTimeBetweenHTTPRequestsLowRange, sleepTimeBetweenHTTPRequestsHighRange)
+        public IpdbScraper(bool enableRandomSleepTime = true, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250,
+            int sleepTimeBetweenHTTPRequestsHighRange = 1500) : base(enableRandomSleepTime, httpRequestMaxRetryCount, sleepTimeBetweenHTTPRequestsLowRange, sleepTimeBetweenHTTPRequestsHighRange)
         {
 
         }
-        public IpdbScraper(ProxyServices proxyService, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
-        : base(proxyService, httpRequestMaxRetryCount, sleepTimeBetweenHTTPRequestsLowRange, sleepTimeBetweenHTTPRequestsHighRange)
+        public IpdbScraper(ProxyServices proxyService, bool enableRandomSleepTime = true, int httpRequestMaxRetryCount = 5, int sleepTimeBetweenHTTPRequestsLowRange = 250, int sleepTimeBetweenHTTPRequestsHighRange = 1500)
+        : base(proxyService, enableRandomSleepTime, httpRequestMaxRetryCount, sleepTimeBetweenHTTPRequestsLowRange, sleepTimeBetweenHTTPRequestsHighRange)
         {
 
         }
@@ -71,7 +71,7 @@ namespace Ipdb.Utilities
 
         public IpdbDatabase ScrapeAll(string incrementalSaveLocation, int start = 1, int end = 10000)
         {
-            Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start,end);
+            Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
             var model = new IpdbDatabase();
             int maxThresholdOfNullsBeforeQuit = 50;
             int thresholdBeforeQuitCounter = 0;
@@ -268,7 +268,9 @@ namespace Ipdb.Utilities
             HtmlNode node = doc.DocumentNode.SelectSingleNode("//b[contains(text(),'" + textToFind + "')]")?.ParentNode?.NextSibling;
             if (node != null)
             {
-                return Convert.ToInt32(node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric());
+                var nodeData = node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric();
+                if (nodeData.IsNumeric())
+                    return Convert.ToInt32(node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric());
             }
 
             return 0;
@@ -279,7 +281,9 @@ namespace Ipdb.Utilities
             HtmlNode node = doc.DocumentNode.SelectSingleNode("//b[contains(text(),'" + textToFind + "')]")?.ParentNode?.NextSibling;
             if (node != null)
             {
-                return Convert.ToInt32(node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric());
+                var nodeData = node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric();
+                if (nodeData.IsNumeric())
+                    return Convert.ToInt32(node.InnerText.CondenseHtml().ConvertHtmlToPlainText().GetOnlyNumeric());
             }
 
             return null;
@@ -358,9 +362,9 @@ namespace Ipdb.Utilities
             if (startOfFileSection != null)
             {
                 var urlNodes = startOfFileSection.SelectNodes(".//img[contains(@src,'/images/')]");
-                if (urlNodes != null) 
+                if (urlNodes != null)
                 {
-                    foreach(var urlNode in urlNodes) //The /tn_ is to remove the thumbnail version of hte image and just get the path to the full image
+                    foreach (var urlNode in urlNodes) //The /tn_ is to remove the thumbnail version of hte image and just get the path to the full image
                         urls.Add(new IpdbUrl() { Name = urlNode.Attributes["alt"].Value?.Trim(), Url = urlNode.Attributes["src"].Value?.Replace("/tn_", "/") });
                 }
             }

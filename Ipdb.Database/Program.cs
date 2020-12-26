@@ -24,16 +24,16 @@ namespace Ipdb.Database
 
             var database = new IpdbDatabase();
             var scraper = new IpdbScraper();
-
+            scraper.EnableRandomSleepTime = false; //Try do it as fast as possible.
             string finalFileToSaveTo = "C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabase.json";
             string tempFileToSaveTo = "C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabasetemp.json";
 
             database = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(tempFileToSaveTo));
 
-            //database = scraper.ScrapeAllResume(database, tempFileToSaveTo, 787, 10000);
-            //var oneResult = scraper.Scrape(1);
+            database = scraper.ScrapeAllResume(database, tempFileToSaveTo, 1051, 10000);
+            //var oneResult = scraper.Scrape(1090);
             //var result = scraper.ScrapeAll(fileToSaveTo, 750, 800);
-            var result = scraper.ScrapeAll("C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabasetemp.json");
+            //var result = scraper.ScrapeAll(tempFileToSaveTo);
 
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
