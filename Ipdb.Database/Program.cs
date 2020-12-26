@@ -25,8 +25,14 @@ namespace Ipdb.Database
             var database = new IpdbDatabase();
             var scraper = new IpdbScraper();
 
+            string finalFileToSaveTo = "C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabase.json";
+            string tempFileToSaveTo = "C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabasetemp.json";
+
+            database = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(tempFileToSaveTo));
+
+            //database = scraper.ScrapeAllResume(database, tempFileToSaveTo, 787, 10000);
             //var oneResult = scraper.Scrape(1);
-            //var result = scraper.ScrapeAll(1, 5);
+            //var result = scraper.ScrapeAll(fileToSaveTo, 750, 800);
             var result = scraper.ScrapeAll("C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabasetemp.json");
 
             JsonSerializer serializer = new JsonSerializer();
@@ -34,10 +40,10 @@ namespace Ipdb.Database
             serializer.NullValueHandling = NullValueHandling.Ignore;
             serializer.Formatting = Formatting.Indented;
             //serializer.Error += Serializer_Error; //Ignore errors
-            using (StreamWriter sw = new StreamWriter("C:\\TFS\\Ipdb.Database\\Ipdb.Database\\Database\\ipdbdatabase.json", false))
+            using (StreamWriter sw = new StreamWriter(finalFileToSaveTo, false))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                serializer.Serialize(writer, result);
+                serializer.Serialize(writer, database);
             }
 
             Log.Information("Scraping Finished.");

@@ -25,6 +25,50 @@ namespace Ipdb.Utilities
 
         }
 
+        public IpdbDatabase ScrapeAllResume(IpdbDatabase database, string incrementalSaveLocation, int start = 1, int end = 10000)
+        {
+            if (database == null)
+                throw new Exception("You must resume from an existing database");
+            Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
+            var model = database;
+            int maxThresholdOfNullsBeforeQuit = 50;
+            int thresholdBeforeQuitCounter = 0;
+            for (int i = start; i < end; i++)
+            {
+                var result = Scrape(i);
+                if (result != null)
+                {
+                    model.Data.Add(result);
+                    thresholdBeforeQuitCounter = 0; //Reset since we finally found a valid machine id
+                }
+                else
+                    thresholdBeforeQuitCounter++;
+
+                if (thresholdBeforeQuitCounter > maxThresholdOfNullsBeforeQuit)
+                {
+                    Log.Information("{Scraper}: Reached maximum threshold of invalid machine id's not returning results. Quiting...", _scraperName);
+                    break; //Reached to many invalid machines, quit.
+                }
+
+                if (i % 50 == 0 && !string.IsNullOrEmpty(incrementalSaveLocation)) //Every 50 entries save where we are at so we can resume if errors occur
+                {
+                    Log.Information("{Scraper}: Reached incremental save threshold. Saving where we are at so far.", _scraperName);
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    serializer.NullValueHandling = NullValueHandling.Ignore;
+                    serializer.Formatting = Formatting.Indented;
+                    //serializer.Error += Serializer_Error; //Ignore errors
+                    using (StreamWriter sw = new StreamWriter(incrementalSaveLocation, false))
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                    {
+                        serializer.Serialize(writer, model);
+                    }
+                }
+            }
+            Log.Information("{Scraper}: Finished Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
+            return model;
+        }
+
         public IpdbDatabase ScrapeAll(string incrementalSaveLocation, int start = 1, int end = 10000)
         {
             Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start,end);
@@ -83,10 +127,10 @@ namespace Ipdb.Utilities
             result.AdditionalDetails = node.InnerText.Replace(result.Title + " /", "").Trim();
 
             //Get # Players info
-            if (result.AdditionalDetails.ToLower().Contains("players"))
+            if (result.AdditionalDetails.ToLower().Contains("player"))
             {
                 var temp = result.AdditionalDetails.ToLower();
-                var endIndex = temp.IndexOf("players");
+                var endIndex = temp.IndexOf("player");
                 if (endIndex >= 0)
                 {
                     var previousSlash = temp.LastIndexOf("/", endIndex - 4); //Rewide back a few spaces
@@ -146,6 +190,8 @@ namespace Ipdb.Utilities
             result.Files = GetFileUrlsBySignificantNode(doc, "Files:");
             Log.Information("{Scraper}: Fetching Multimedia Files...", _scraperName);
             result.MultimediaFiles = GetFileUrlsBySignificantNode(doc, "Multimedia Files:");
+            Log.Information("{Scraper}: Fetching Image Files...", _scraperName);
+            result.ImageFiles = GetImageUrlsBySignificantNode(doc, "Images:");
 
             Log.Information("{Scraper}: Finished fetching data for machine id {id} ({title})...", _scraperName, machineId, result.Title);
             return result;
@@ -296,6 +342,26 @@ namespace Ipdb.Utilities
                             nextRow = nextRow.NextSibling;
                         }
                     }
+                }
+            }
+            if (urls.Count == 0)
+                return null; //Prevent it from being serialized in the .json so it's smaller
+            return urls;
+        }
+
+        private List<IpdbUrl> GetImageUrlsBySignificantNode(HtmlDocument doc, string textToFind)
+        {
+            List<IpdbUrl> urls = new List<IpdbUrl>();
+            HtmlNode startOfFileSection = doc.DocumentNode.SelectSingleNode("//b/span[contains(text(),'" + textToFind + "')]")?.ParentNode?.ParentNode?.ParentNode;
+            if (startOfFileSection == null) //Try alternate lookup mechanism. Sometimes it's a //b/span and sometimes its just a //b
+                startOfFileSection = doc.DocumentNode.SelectSingleNode("//b[contains(text(),'" + textToFind + "')]")?.ParentNode?.ParentNode;
+            if (startOfFileSection != null)
+            {
+                var urlNodes = startOfFileSection.SelectNodes(".//img[contains(@src,'/images/')]");
+                if (urlNodes != null) 
+                {
+                    foreach(var urlNode in urlNodes) //The /tn_ is to remove the thumbnail version of hte image and just get the path to the full image
+                        urls.Add(new IpdbUrl() { Name = urlNode.Attributes["alt"].Value?.Trim(), Url = urlNode.Attributes["src"].Value?.Replace("/tn_", "/") });
                 }
             }
             if (urls.Count == 0)

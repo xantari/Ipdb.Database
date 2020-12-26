@@ -15,6 +15,7 @@ namespace Ipdb.Models
             ServiceBulletins = new List<IpdbUrl>();
             Files = new List<IpdbUrl>();
             MultimediaFiles = new List<IpdbUrl>();
+            ImageFiles = new List<IpdbUrl>();
         }
 
         public int IpdbId { get; set; }
@@ -64,5 +65,6 @@ namespace Ipdb.Models
         public List<IpdbUrl> ServiceBulletins { get; set; }
         public List<IpdbUrl> Files { get; set; }
         public List<IpdbUrl> MultimediaFiles { get; set; }
+        public List<IpdbUrl> ImageFiles { get; set; }
     }
 }

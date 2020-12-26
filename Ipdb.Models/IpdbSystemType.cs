@@ -20,6 +20,8 @@ namespace Ipdb.Models
     {
         public static IpdbSystemType GetSystemTypeFromString(string type)
         {
+            if (type == null)
+                return IpdbSystemType.Unknown;
             if (type.Contains("Solid State Electronic"))
                 return IpdbSystemType.SolidState;
             if (type.Contains("Electro-mechanical"))
@@ -31,6 +33,8 @@ namespace Ipdb.Models
 
         public static string GetTypeShortName(string type)
         {
+            if (type == null)
+                return string.Empty;
             if (type.Contains("Solid State Electronic"))
                 return "SS";
             if (type.Contains("Electro-mechanical"))
