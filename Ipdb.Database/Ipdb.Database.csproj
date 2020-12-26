@@ -15,6 +15,7 @@
     <None Remove="appsettings.json" />
     <None Remove="Database\readme.md" />
     <None Remove="Data\UserAgentStrings.txt" />
+    <None Remove="GitCommit.ps1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\UserAgentStrings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GitCommit.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
