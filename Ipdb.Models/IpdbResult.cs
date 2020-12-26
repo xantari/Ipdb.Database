@@ -9,13 +9,14 @@ namespace Ipdb.Models
     {
         public IpdbResult()
         {
-            RuleSheetUrls = new List<IpdbUrl>();
-            ROMs = new List<IpdbUrl>();
-            Documentation = new List<IpdbUrl>();
-            ServiceBulletins = new List<IpdbUrl>();
-            Files = new List<IpdbUrl>();
-            MultimediaFiles = new List<IpdbUrl>();
-            ImageFiles = new List<IpdbUrl>();
+            //Don't new these up, otherwise blank arrays will get created if you re-save the file
+            //RuleSheetUrls = new List<IpdbUrl>();
+            //ROMs = new List<IpdbUrl>();
+            //Documentation = new List<IpdbUrl>();
+            //ServiceBulletins = new List<IpdbUrl>();
+            //Files = new List<IpdbUrl>();
+            //MultimediaFiles = new List<IpdbUrl>();
+            //ImageFiles = new List<IpdbUrl>();
         }
 
         public int IpdbId { get; set; }

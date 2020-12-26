@@ -1,8 +1,10 @@
 ﻿using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -151,6 +153,24 @@ namespace Ipdb.Utilities
                 Log.Debug("Sleepinging for {time}ms", time);
                 Thread.Sleep(time);
             }
+        }
+
+        public static T RemoveNullProperties<T>(string jsonData, string dataKey)
+        {
+            JObject data = JObject.Parse(jsonData);
+
+            var emptyArrayProperties = data[dataKey]
+                .Children<JObject>()
+                .SelectMany(jo => jo.Properties())
+                .Where(jp => jp.Value.Type == JTokenType.Array && !jp.Value.HasValues)
+                .ToList();
+
+            foreach (JProperty prop in emptyArrayProperties)
+            {
+                prop.Remove();
+            }
+
+            return data.ToObject<T>();
         }
     }
 }
