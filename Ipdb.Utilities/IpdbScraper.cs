@@ -31,7 +31,7 @@ namespace Ipdb.Utilities
                 throw new Exception("You must resume from an existing database");
             Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
             var model = database;
-            int maxThresholdOfNullsBeforeQuit = 50;
+            int maxThresholdOfNullsBeforeQuit = 300;
             int thresholdBeforeQuitCounter = 0;
             for (int i = start; i < end; i++)
             {
@@ -73,7 +73,7 @@ namespace Ipdb.Utilities
         {
             Log.Information("{Scraper}: Beginning Scrape All. Start: {start} End: {end}...", _scraperName, start, end);
             var model = new IpdbDatabase();
-            int maxThresholdOfNullsBeforeQuit = 50;
+            int maxThresholdOfNullsBeforeQuit = 300;
             int thresholdBeforeQuitCounter = 0;
             for (int i = start; i < end; i++)
             {
@@ -204,6 +204,8 @@ namespace Ipdb.Utilities
         /// <returns></returns>
         private string GetManufacturerShortName(string manufacturer)
         {
+            if (string.IsNullOrEmpty(manufacturer))
+                return null;
             if (manufacturer.ToLower().Contains("alvin g."))
                 return "Alvin G.";
             if (manufacturer.ToLower().Contains("atari"))

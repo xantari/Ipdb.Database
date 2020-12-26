@@ -76,12 +76,16 @@ namespace Ipdb.Utilities
             doc.LoadHtml($@"<html><body>{html}</body></html>");
 
             StringBuilder sb = new StringBuilder();
-            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//text()"))
+            var nodes = doc.DocumentNode.SelectNodes("//text()");
+            if (nodes != null)
             {
-                if (lineAppendMode)
-                    sb.AppendLine(node.InnerText);
-                else
-                    sb.Append(node.InnerText);
+                foreach (HtmlNode node in nodes)
+                {
+                    if (lineAppendMode)
+                        sb.AppendLine(node.InnerText);
+                    else
+                        sb.Append(node.InnerText);
+                }
             }
             return sb.ToString().Trim();
         }
