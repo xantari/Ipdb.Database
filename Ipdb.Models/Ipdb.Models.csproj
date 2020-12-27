@@ -4,12 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>https://github.com/xantari</Authors>
-    <Company>https://github.com/xantari</Company>
+    <Company />
     <Description>IPDB Models</Description>
     <PackageProjectUrl>https://github.com/xantari</PackageProjectUrl>
     <RepositoryUrl>https://github.com/xantari</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ipdb models</PackageTags>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
