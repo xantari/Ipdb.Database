@@ -38,7 +38,7 @@ namespace Ipdb.Utilities
                 UseCookies = true,
                 CookieContainer = CookieJar,
                 AllowAutoRedirect = true,
-                MaxAutomaticRedirections = 20
+                MaxAutomaticRedirections = 5
                 //UseProxy = true
             };
 
@@ -120,8 +120,7 @@ namespace Ipdb.Utilities
                 try
                 {
                     Uri uriResult;
-                    bool isValidUri = Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out uriResult)
-                        && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                    bool isValidUri = Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out uriResult);
                     if (!isValidUri)
                     {
                         Log.Error("Invalid Uri: {url}.", url);
@@ -132,7 +131,7 @@ namespace Ipdb.Utilities
 
                     if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NotFound)
                     {
-                        Log.Error("Invalid response. Url: {url}. Content: {content}", url, response.Content.ReadAsStringAsync().Result);
+                        Log.Error("Invalid response. Url: {url}.", url);
                     }
                     else if (response.StatusCode == HttpStatusCode.NotFound)
                     {
