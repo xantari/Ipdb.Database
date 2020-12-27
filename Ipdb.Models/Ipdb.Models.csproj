@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>https://github.com/xantari</Authors>
+    <Company>https://github.com/xantari</Company>
+    <Description>IPDB Models</Description>
+    <PackageProjectUrl>https://github.com/xantari</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xantari</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>ipdb models</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,7 +12,9 @@ Database set to refresh weekly automatically. If however there are minimal chang
 
 [IPDB Database (.json)](https://github.com/xantari/Ipdb.Database/raw/master/Ipdb.Database/Database/ipdbdatabase.json)
 
-# Loading the database (C#)
+# Loading the database (C#) [![Build status](https://ci.appveyor.com/api/projects/status/kyjhljh4ue9w6gk4/branch/master?svg=true)](https://ci.appveyor.com/project/xantari/ipdb-models/branch/master) [![NuGet tag](https://img.shields.io/badge/nuget-Ipdb.Models-blue.svg)](https://www.nuget.org/packages?q=Ipdb.Models)
+
+Grab the nuget package (Ipdb.Models).
 
 ```cs
 var data = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(@"{pathToJson}\\ipdbdatabase.json"));
