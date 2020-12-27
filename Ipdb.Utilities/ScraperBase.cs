@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using Serilog;
 using Ipdb.Models;
+using Ipdb.Utilities.Models;
 
 namespace Ipdb.Utilities
 {

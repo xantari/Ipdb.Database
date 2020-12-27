@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Ipdb.Models;
+using Ipdb.Utilities.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;

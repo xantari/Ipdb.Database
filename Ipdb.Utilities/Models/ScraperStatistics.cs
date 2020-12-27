@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ipdb.Models
+namespace Ipdb.Utilities.Models
 {
     public class ScraperStatistics
     {

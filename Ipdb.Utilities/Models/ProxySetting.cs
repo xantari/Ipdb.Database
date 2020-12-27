@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ipdb.Models
+namespace Ipdb.Utilities.Models
 {
     public class ProxySetting
     {
