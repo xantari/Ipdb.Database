@@ -37,7 +37,7 @@ namespace Ipdb.Utilities
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
                 UseCookies = true,
                 CookieContainer = CookieJar,
-                AllowAutoRedirect = false,
+                AllowAutoRedirect = true,
                 MaxAutomaticRedirections = 20
                 //UseProxy = true
             };
@@ -116,10 +116,30 @@ namespace Ipdb.Utilities
             {
                 if (tryCount != 0)
                     Statistics.TotalRetries++;
-
+                tryCount++;
                 try
                 {
+                    Uri uriResult;
+                    bool isValidUri = Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out uriResult)
+                        && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                    if (!isValidUri)
+                    {
+                        Log.Error("Invalid Uri: {url}.", url);
+                        return null;
+                    }
+
                     HttpResponseMessage response = HttpWebClient.GetAsync(url).Result;
+
+                    if (!response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.NotFound)
+                    {
+                        Log.Error("Invalid response. Url: {url}. Content: {content}", url, response.Content.ReadAsStringAsync().Result);
+                    }
+                    else if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        Log.Error("404 not found: {url}.", url);
+                        return null;
+                    }
+
                     Statistics.TotalHTTPGets++;
                     response.EnsureSuccessStatusCode();
 
