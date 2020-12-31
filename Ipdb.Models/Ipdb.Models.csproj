@@ -6,8 +6,8 @@
     <Authors>https://github.com/xantari</Authors>
     <Company />
     <Description>IPDB Models</Description>
-    <PackageProjectUrl>https://github.com/xantari</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/xantari</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/xantari/Ipdb.Database</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xantari/Ipdb.Database</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>ipdb models</PackageTags>
     <Version>1.0.0</Version>
