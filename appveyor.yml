@@ -26,7 +26,7 @@ deploy:
     branch: master
 skip_commits:
   files:
-    - Ipdb.Database/Databases/*
+    - Ipdb.Database/Database/*
     - .github/*
     - readme.md
     - .gitignore
