@@ -74,7 +74,7 @@ namespace Ipdb.Database
             catch (Exception ex)
             {
                 Log.Error("{error}", ex);
-                throw ex;
+                throw;
             }
 
             Log.Information("Scraping Finished.");
