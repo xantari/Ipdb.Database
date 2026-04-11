@@ -1,3 +1,7 @@
+<p align="center">
+	<img src="Ipdb-database-logo.png" alt="Ipdb.Database logo" />
+</p>
+
 # Ipdb.Database  [![Build status](https://github.com/xantari/Ipdb.Database/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/xantari/Ipdb.Database/actions/workflows/build.yml) [![NuGet tag](https://img.shields.io/badge/nuget-Ipdb.Models-blue.svg)](https://www.nuget.org/packages?q=Ipdb.Models)
 Ipdb Database in .json format.
 
