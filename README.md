@@ -1,4 +1,4 @@
-# Ipdb.Database  [![Build status](https://ci.appveyor.com/api/projects/status/kyjhljh4ue9w6gk4/branch/master?svg=true)](https://ci.appveyor.com/project/xantari/ipdb-models/branch/master) [![NuGet tag](https://img.shields.io/badge/nuget-Ipdb.Models-blue.svg)](https://www.nuget.org/packages?q=Ipdb.Models)
+# Ipdb.Database  [![Build status](https://github.com/xantari/Ipdb.Database/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/xantari/Ipdb.Database/actions/workflows/build.yml) [![NuGet tag](https://img.shields.io/badge/nuget-Ipdb.Models-blue.svg)](https://www.nuget.org/packages?q=Ipdb.Models)
 Ipdb Database in .json format.
 
 IPDB doesn't offer an open API so in order to allow for lookups / information querying in pinball 

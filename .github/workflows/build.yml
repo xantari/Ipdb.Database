@@ -29,10 +29,10 @@ jobs:
         run: dotnet restore Ipdb.Models/Ipdb.Models.csproj
 
       - name: Build
-        run: dotnet build Ipdb.Models/Ipdb.Models.csproj --configuration Release --no-restore /p:Version=1.0.${{ github.run_number }}
+        run: dotnet build Ipdb.Models/Ipdb.Models.csproj --configuration Release --no-restore /p:Version=1.1.${{ github.run_number }}
 
       - name: Pack
-        run: dotnet pack Ipdb.Models/Ipdb.Models.csproj --configuration Release --no-build --output nupkgs /p:Version=1.0.${{ github.run_number }}
+        run: dotnet pack Ipdb.Models/Ipdb.Models.csproj --configuration Release --no-build --output nupkgs /p:Version=1.1.${{ github.run_number }}
 
       - name: Publish to NuGet
         run: dotnet nuget push nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
