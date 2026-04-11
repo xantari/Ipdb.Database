@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Ipdb.Models
 {
@@ -10,7 +10,7 @@ namespace Ipdb.Models
         public IpdbResult()
         {
             //Don't new these up, otherwise blank arrays will get created if you re-save the file
-            //RuleSheetUrls = new List<IpdbUrl>();
+            //RuleSheetUrls = new List<IpdbUrl>(); 
             //ROMs = new List<IpdbUrl>();
             //Documentation = new List<IpdbUrl>();
             //ServiceBulletins = new List<IpdbUrl>();
