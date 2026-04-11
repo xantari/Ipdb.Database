@@ -32,4 +32,12 @@ jobs:
         run: dotnet pack Ipdb.Models/Ipdb.Models.csproj --configuration Release --no-restore --output nupkgs /p:Version=1.1.${{ github.run_number }}
 
       - name: Publish to NuGet
-        run: dotnet nuget push "./nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        shell: pwsh
+        run: |
+          $nupkg = Get-ChildItem -Path "nupkgs" -Filter "*.nupkg" | Select-Object -First 1
+          if ($nupkg) {
+            dotnet nuget push $nupkg.FullName --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+          } else {
+            Write-Error "No .nupkg file found in nupkgs directory"
+            exit 1
+          }
